@@ -68,7 +68,28 @@ In the above case, you'd want to install the [v23 branch](https://github.com/dpa
 Because Cordova doesn't support tags in plugins sourced from npm, you'll need to install this version directly from the git repo:
 
     cordova plugin add https://github.com/dpa99c/cordova-android-support-gradle-release#v23
-
+    
+The following branches currently exist:
+    
+- [master](https://github.com/dpa99c/cordova-android-support-gradle-release) (default)
+    - The most recent major release
+    - Currently uses `25.+`
+- [edge](https://github.com/dpa99c/cordova-android-support-gradle-release/tree/edge)
+    - The most recent bleeding-edge release
+    - Uses `+`
+- [v25](https://github.com/dpa99c/cordova-android-support-gradle-release/tree/v25)
+    - The highest v25 version
+    - Uses `25.+`
+- [v24](https://github.com/dpa99c/cordova-android-support-gradle-release/tree/v24)
+    - The highest v24 version
+    - Uses `24.+`
+- [v23](https://github.com/dpa99c/cordova-android-support-gradle-release/tree/v23)
+    - The highest v23 version
+    - Uses `23.+`
+- [v22](https://github.com/dpa99c/cordova-android-support-gradle-release/tree/v22)
+    - The highest v22 version
+    - Uses `22.+`
+    
 # Example cases
 
 ## Example 1
