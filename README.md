@@ -62,9 +62,9 @@ Then this plugin will default to `25.+` because `26` is still in Beta.
 
 In some cases, you may want to specify a different version of the support libraries. For example, [Telerik ImagePicker plugin v2.1.7](https://github.com/Telerik-Verified-Plugins/ImagePicker/tree/2.1.7) specifies `v23` because it contains code that is incompatible with `v24+`. 
 
-In this case, including the default version of this plugin will still result in a build error. So this plugin provides tags/branches for various older major versions of the support libraries.
+In this case, including the default version of this plugin will still result in a build error. So this plugin provides branches for various older major versions of the support libraries.
  
-In the above case, you'd want to install [v23 tag](https://github.com/dpa99c/cordova-android-support-gradle-release/tree/v23) of this plugin which specifies support library versions of v23.
+In the above case, you'd want to install the [v23 branch](https://github.com/dpa99c/cordova-android-support-gradle-release/tree/v23) of this plugin which specifies support library versions of v23.
 Because Cordova doesn't support tags in plugins sourced from npm, you'll need to install this version directly from the git repo:
 
     cordova plugin add https://github.com/dpa99c/cordova-android-support-gradle-release#v23
