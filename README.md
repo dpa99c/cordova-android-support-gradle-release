@@ -74,21 +74,28 @@ The following branches currently exist:
 - [master](https://github.com/dpa99c/cordova-android-support-gradle-release) (default)
     - The most recent major release
     - Currently uses `25.+`
+    - Install with: `cordova plugin add cordova-android-support-gradle-release`
+    - Or: `https://github.com/dpa99c/cordova-android-support-gradle-release`
 - [edge](https://github.com/dpa99c/cordova-android-support-gradle-release/tree/edge)
     - The most recent bleeding-edge release
     - Uses `+`
+    - Install with: `cordova plugin add https://github.com/dpa99c/cordova-android-support-gradle-release#edge`
 - [v25](https://github.com/dpa99c/cordova-android-support-gradle-release/tree/v25)
     - The highest v25 version
     - Uses `25.+`
+    - Install with: `cordova plugin add https://github.com/dpa99c/cordova-android-support-gradle-release#v25`
 - [v24](https://github.com/dpa99c/cordova-android-support-gradle-release/tree/v24)
     - The highest v24 version
     - Uses `24.+`
+    - Install with: `cordova plugin add https://github.com/dpa99c/cordova-android-support-gradle-release#v24`
 - [v23](https://github.com/dpa99c/cordova-android-support-gradle-release/tree/v23)
     - The highest v23 version
     - Uses `23.+`
+    - Install with: `cordova plugin add https://github.com/dpa99c/cordova-android-support-gradle-release#v23`
 - [v22](https://github.com/dpa99c/cordova-android-support-gradle-release/tree/v22)
     - The highest v22 version
     - Uses `22.+`
+    - Install with: `cordova plugin add https://github.com/dpa99c/cordova-android-support-gradle-release#v22`
     
 # Example cases
 
