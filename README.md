@@ -9,12 +9,13 @@ This Cordova/Phonegap plugin for Android aligns various versions of the Android 
 
 - [Purpose](#purpose)
 - [Installation](#installation)
-- [Different library versions](#different-library-versions)
+- [Library versions](#library-versions)
   - [Default version](#default-version)
   - [Other versions](#other-versions)
 - [Example cases](#example-cases)
   - [Example 1](#example-1)
   - [Example 2](#example-2)
+- [Credits](#credits)
 - [License](#license)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
