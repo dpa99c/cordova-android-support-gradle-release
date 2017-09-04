@@ -69,7 +69,7 @@ In this case, including the default version of this plugin will still result in 
  
 In the above case, you'd want to install v23 of the support library. To so, you'd specify the version via the variable:
 
-    cordova plugin add https://github.com/dpa99c/cordova-android-support-gradle-release --variable ANDROID_SUPPORT_VERSION=23.+
+    cordova plugin add cordova-android-support-gradle-release --variable ANDROID_SUPPORT_VERSION=23.+
     
 # Example cases
 
@@ -125,7 +125,7 @@ Observe the build still failed and in the console output is still higher than `v
     :prepareComAndroidSupportSupportV42531Library
     
 9. `cordova plugin rm cordova-android-support-gradle-release`
-10. `cordova plugin add https://github.com/dpa99c/cordova-android-support-gradle-release --variable ANDROID_SUPPORT_VERSION=23.+`
+10. `cordova plugin add cordova-android-support-gradle-release --variable ANDROID_SUPPORT_VERSION=23.+`
 11. `cordova compile`
 
 Observe the build succeeds and in the console output is v23 of Android Support Library.
