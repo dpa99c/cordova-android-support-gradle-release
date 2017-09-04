@@ -1,10 +1,26 @@
+repositories{
+  // Google APIs are now hosted at Maven
+  maven {
+    url 'https://maven.google.com'
+  }
+}
+
+def PLUGIN_NAME = "cordova-android-support-gradle-release"
+
+// Fetch ANDROID_SUPPORT_VERSION var from properties.gradle
+apply from: PLUGIN_NAME + '/properties.gradle'
+
+// List of libs to search for.
+def LIBS = [
+    'com.android.support'
+]
+
+println("+-----------------------------------------------------------------");
+println("| " + PLUGIN_NAME + ": " + ANDROID_SUPPORT_VERSION);
+println("+-----------------------------------------------------------------");
+
 configurations.all {
     resolutionStrategy.eachDependency { DependencyResolveDetails details ->
-        def requested = details.requested
-        if (requested.group == 'com.android.support') {
-            if (!requested.name.startsWith("multidex")) {
-                details.useVersion '25.+'
-            }
-        }
+        if (details.requested.group in LIBS) { details.useVersion ANDROID_SUPPORT_VERSION }
     }
 }

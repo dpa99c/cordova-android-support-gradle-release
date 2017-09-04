@@ -2,14 +2,17 @@
 <plugin xmlns="http://www.phonegap.com/ns/plugins/1.0"
         xmlns:android="http://schemas.android.com/apk/res/android"
         id="cordova-android-support-gradle-release"
-        version="0.0.2">
+        version="1.0.0">
 
     <name>cordova-android-support-gradle-release</name>
     <description>Cordova/Phonegap plugin to align various versions of the Android Support libraries specified by other plugins to the latest release version</description>
     <author>Dave Alden</author>
 
     <platform name="android">
+        <hook type="before_prepare" src="scripts/before-prepare.js" />
+        <preference name="ANDROID_SUPPORT_VERSION" default="26.+" />
         <framework src="cordova-android-support-gradle-release.gradle" custom="true" type="gradleReference" />
+        <source-file src="properties.gradle" target-dir="cordova-android-support-gradle-release" />
     </platform>
 
 </plugin>
