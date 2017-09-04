@@ -94,7 +94,7 @@ Observe the build failed and in the console output is higher than `v25.3.1` (e.g
     :prepareComAndroidSupportSupportV42600Alpha1Library
 
 7. `cordova plugin add cordova-android-support-gradle-release --variable ANDROID_SUPPORT_VERSION=25.+`
-8. `cordova compile`    
+8. `cordova prepare && cordova compile`    
 
 Observe the build succeeds and in the console output is `v25` of Android Support Library.
 
@@ -126,7 +126,7 @@ Observe the build still failed and in the console output is still higher than `v
     
 9. `cordova plugin rm cordova-android-support-gradle-release`
 10. `cordova plugin add cordova-android-support-gradle-release --variable ANDROID_SUPPORT_VERSION=23.+`
-11. `cordova compile`
+11. `cordova prepare && cordova compile`
 
 Observe the build succeeds and in the console output is v23 of Android Support Library.
 
