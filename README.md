@@ -1,7 +1,7 @@
 cordova-android-support-gradle-release
 ======================================
 
-This Cordova/Phonegap plugin for Android aligns various versions of the Android Support libraries specified by other plugins to the latest release (or a specific) version.
+This Cordova/Phonegap plugin for Android aligns various versions of the Android Support libraries specified by other plugins to a specific version.
 
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
