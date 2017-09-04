@@ -1,7 +1,7 @@
 {
   "name": "cordova-android-support-gradle-release",
   "version": "1.0.0",
-  "description": "Cordova/Phonegap plugin to align various versions of the Android Support libraries specified by other plugins to the latest release version",
+  "description": "Cordova/Phonegap plugin to align various versions of the Android Support libraries specified by other plugins to a specific version",
   "author": "Dave Alden",
   "license": "MIT",
   "dependencies": {
