@@ -13,6 +13,7 @@ fs.readFile(path.resolve(process.cwd(), 'config.xml'), function (err, data) {
             return console.log(PLUGIN_NAME, ": ERROR: ", err);
         }
         var plugins = result.widget.plugin;
+        if(!plugins || plugins.length === 0) return;
         for (var n = 0, len = plugins.length; n < len; n++) {
             var plugin = plugins[n];
             if (plugin.$.name === PLUGIN_NAME) {
