@@ -15,12 +15,17 @@ def LIBS = [
     'com.android.support'
 ]
 
+def IGNORED = [
+    'multidex',
+    'multidex-instrumentation'
+]
+
 println("+-----------------------------------------------------------------");
 println("| " + PLUGIN_NAME + ": " + ANDROID_SUPPORT_VERSION);
 println("+-----------------------------------------------------------------");
 
 configurations.all {
     resolutionStrategy.eachDependency { DependencyResolveDetails details ->
-        if (details.requested.group in LIBS) { details.useVersion ANDROID_SUPPORT_VERSION }
+        if (details.requested.group in LIBS && !(details.requested.name in IGNORED)) { details.useVersion ANDROID_SUPPORT_VERSION }
     }
 }
