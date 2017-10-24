@@ -8,6 +8,10 @@
     <description>Cordova/Phonegap plugin to align various versions of the Android Support libraries specified by other plugins to a specific version</description>
     <author>Dave Alden</author>
 
+    <engines>
+        <engine name="cordova" version=">=6.2.0" />
+    </engines>
+
     <platform name="android">
         <hook type="before_prepare" src="scripts/before-prepare.js" />
         <hook type="after_prepare" src="scripts/after-prepare.js" />

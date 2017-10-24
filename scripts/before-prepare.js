@@ -1,8 +1,13 @@
-var fs      = require ('fs');
-var path    = require('path');
-var parser  = require('xml2js');
-
 const PLUGIN_NAME         = "cordova-android-support-gradle-release";
+
+try{
+    var fs = require('fs');
+    var path = require('path');
+    var parser = require('xml2js');
+}catch(e){
+    throw PLUGIN_NAME + ": Failed to load dependencies. If using cordova@6 CLI, ensure this plugin is installed with the --fetch option: " + e.message;
+}
+
 const GRADLE_FILENAME     = path.resolve(process.cwd(), 'platforms', 'android', PLUGIN_NAME, 'properties.gradle');
 const PROPERTIES_TEMPLATE = 'ext {ANDROID_SUPPORT_VERSION = "<VERSION>"}'
 
