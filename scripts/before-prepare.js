@@ -44,7 +44,7 @@ ext {
 function setGradleVersion(version) {
   console.log(PLUGIN_NAME, " ANDROID_SUPPORT_VERSION: ", version);
   fs.writeFile(GRADLE_FILENAME, PROPERTIES_TEMPLATE.replace(/<VERSION>/, version), 'utf8', function (err) {
-     if (err) return console.log(PLUGIN_NAME, " FAILED TO WRITE ", GRADLE_FILENAME, " > ", ANDROID_SUPPORT_VERSION, err);
+     if (err) return console.log(PLUGIN_NAME, " FAILED TO WRITE ", GRADLE_FILENAME, " > ", version, err);
   });
 }
 
