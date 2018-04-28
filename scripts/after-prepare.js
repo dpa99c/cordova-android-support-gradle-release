@@ -31,9 +31,9 @@ function getCordovaAndroidVersion(){
 
 function run() {
     try {
-        var fs = require('fs');
-        var path = require('path');
-        var parser = require('xml2js');
+        fs = require('fs');
+        path = require('path');
+        parser = require('xml2js');
     } catch (e) {
         throw("Failed to load dependencies. If using cordova@6 CLI, ensure this plugin is installed with the --fetch option: " + e.toString());
     }
