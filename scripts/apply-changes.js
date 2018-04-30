@@ -1,20 +1,24 @@
 const PLUGIN_NAME = "cordova-android-support-gradle-release";
-const SCRIPT_NAME = "before-prepare";
 const V6 = "cordova-android@6";
 const V7 = "cordova-android@7";
+const PACKAGE_PATTERN = /(compile "com.android.support:[^:]+:)([^"]+)"/;
+const PROPERTIES_TEMPLATE = 'ext {ANDROID_SUPPORT_VERSION = "<VERSION>"}';
 
 var FILE_PATHS = {};
 FILE_PATHS[V6] = {
+    "build.gradle": "platforms/android/build.gradle",
     "properties.gradle": "platforms/android/"+PLUGIN_NAME+"/properties.gradle"
 };
 FILE_PATHS[V7] = {
+    "build.gradle": "platforms/android/app/build.gradle",
     "properties.gradle": "platforms/android/app/"+PLUGIN_NAME+"/properties.gradle"
 };
 
 var deferral, fs, path, parser, platformVersion;
 
+
 function log(message) {
-    console.log(PLUGIN_NAME + "." + SCRIPT_NAME + ": " + message);
+    console.log(PLUGIN_NAME + ": " + message);
 }
 
 function onError(error) {
@@ -40,9 +44,6 @@ function run() {
     platformVersion = getCordovaAndroidVersion();
     log("Android platform: " + platformVersion);
 
-    const GRADLE_FILENAME = path.resolve(process.cwd(), FILE_PATHS[platformVersion]["properties.gradle"]);
-    const PROPERTIES_TEMPLATE = 'ext {ANDROID_SUPPORT_VERSION = "<VERSION>"}';
-
     var data = fs.readFileSync(path.resolve(process.cwd(), 'config.xml'));
     parser.parseString(data, attempt(function (err, result) {
         if (err) throw err;
@@ -55,14 +56,21 @@ function run() {
             }
         }
         if (version) {
-            fs.writeFileSync(GRADLE_FILENAME, PROPERTIES_TEMPLATE.replace(/<VERSION>/, version), 'utf8');
-            log("Wrote custom version '" + version + "' to " + GRADLE_FILENAME);
+            // build.gradle
+            var buildGradlePath = path.resolve(process.cwd(), FILE_PATHS[platformVersion]["build.gradle"]);
+            var contents = fs.readFileSync(buildGradlePath).toString();
+            fs.writeFileSync(buildGradlePath, contents.replace(PACKAGE_PATTERN, "$1" + version + '"'), 'utf8');
+            log("Wrote custom version '" + version + "' to " + buildGradlePath);
+
+            // properties.gradle
+            var propertiesGradlePath = path.resolve(process.cwd(), FILE_PATHS[platformVersion]["properties.gradle"]);
+            fs.writeFileSync(propertiesGradlePath, PROPERTIES_TEMPLATE.replace(/<VERSION>/, version), 'utf8');
+            log("Wrote custom version '" + version + "' to " + propertiesGradlePath);
         } else {
             log("No custom version found in config.xml - using plugin default");
         }
         deferral.resolve();
     }));
-
 }
 
 function attempt(fn) {

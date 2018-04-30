@@ -14,10 +14,9 @@
     </engines>
 
     <platform name="android">
-        <hook type="before_prepare" src="scripts/before-prepare.js" />
-        <hook type="after_prepare" src="scripts/after-prepare.js" />
-        <hook type="before_build" src="scripts/after-prepare.js" />
-        <hook type="after_plugin_install" src="scripts/after-prepare.js" />
+        <hook type="after_prepare" src="scripts/apply-changes.js" />
+        <hook type="before_build" src="scripts/apply-changes.js" />
+        <hook type="after_plugin_install" src="scripts/apply-changes.js" />
         <preference name="ANDROID_SUPPORT_VERSION" default="27.+" />
         <framework src="cordova-android-support-gradle-release.gradle" custom="true" type="gradleReference" />
         <source-file src="properties.gradle" target-dir="cordova-android-support-gradle-release" /> <!-- cordova-android@6-->
