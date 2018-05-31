@@ -8,7 +8,6 @@ This Cordova/Phonegap plugin for Android aligns various versions of the Android 
 **Table of Contents**
 
 - [Purpose](#purpose)
-- [Caveats](#caveats)
 - [Installation](#installation)
 - [Library versions](#library-versions)
   - [Default version](#default-version)
@@ -43,21 +42,10 @@ The problem arises when these plugins specify different versions of the support 
 
 To resolve these version collisions, this plugin injects a Gradle configuration file into the native Android platform project, which overrides any versions specified by other plugins, and forces them to the version specified in its Gradle file.
 
-If you're encountering similar problems with the Play Services library, checkout the sister plugin: [cordova-android-play-services-gradle-release](https://github.com/dpa99c/cordova-android-play-services-gradle-release).
+If you're encountering similar problems with the Play Services and/or Firebase libraries, checkout the sister plugins:
+- [cordova-android-play-services-gradle-release](https://github.com/dpa99c/cordova-android-play-services-gradle-release)
+- [cordova-android-firebase-gradle-release](https://github.com/dpa99c/cordova-android-firebase-gradle-release)
 
-# Caveats
-
-There are certain Cordova plugins which, if included into a Cordova project along with this plugin, then this plugin is unable to override the library versions they specify.
-This is because they use a class to immediately apply their specified Google libraries, instead of just relying on the string version to be applied later on by Gradle. 
-
-Two commonly used plugins which do this are:
-
-- [cordova-plugin-fcm](https://github.com/fechanique/cordova-plugin-fcm) in [FCMPlugin.gradle](https://github.com/fechanique/cordova-plugin-fcm/blob/master/src/android/FCMPlugin.gradle#L13)
-- [phonegap-plugin-push](https://github.com/phonegap/phonegap-plugin-push) in [push.gradle](https://github.com/phonegap/phonegap-plugin-push/blob/master/push.gradle#L35)
-
-If you include these plugins (or others using the `apply plugin` strategy) in your project, you will likely find that this plugin cannot resolve your build issues because it's unable to override the library versions.
-
-[See here](https://github.com/fechanique/cordova-plugin-fcm/issues/350) for some suggestions for resolving these issues with `cordova-plugin-fcm`.
 
 
 # Installation
