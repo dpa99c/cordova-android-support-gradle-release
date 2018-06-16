@@ -1,7 +1,7 @@
 const PLUGIN_NAME = "cordova-android-support-gradle-release";
 const V6 = "cordova-android@6";
 const V7 = "cordova-android@7";
-const PACKAGE_PATTERN = /(compile "com.android.support:[^:]+:)([^"]+)"/;
+const PACKAGE_PATTERN = /(compile "com.android.support:[^:]+:)([^"]+)"/g;
 const PROPERTIES_TEMPLATE = 'ext {ANDROID_SUPPORT_VERSION = "<VERSION>"}';
 
 var FILE_PATHS = {};
