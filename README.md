@@ -55,9 +55,10 @@ If you're encountering similar problems with the Play Services and/or Firebase l
     
 The plugin needs to be installed with the [`cordova-fetch`](https://cordova.apache.org/news/2016/05/24/tools-release.html) mechanism in order to satisfy its [package dependencies](https://github.com/dpa99c/cordova-android-support-gradle-release/blob/master/package.json#L8) by installing it via npm.
 
-Therefore if you're installing with `cordova@6`, you'll need to explicitly specify the `--fetch` option:
+If you're installing with `cordova@6`, you'll need to explicitly specify the `--fetch` option, and `--save` option if you want to specify a non-default version:
 
-    $ cordova plugin add cordova-android-support-gradle-release --fetch   
+    $ cordova plugin add cordova-android-support-gradle-release --fetch
+    $ cordova plugin add cordova-android-support-gradle-release --fetch --save --variable ANDROID_SUPPORT_VERSION={required version}
 
 # Library versions
 
