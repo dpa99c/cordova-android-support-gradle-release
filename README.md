@@ -1,4 +1,4 @@
-cordova-android-support-gradle-release
+cordova-android-support-gradle-release [![Latest Stable Version](https://img.shields.io/npm/v/cordova-android-support-gradle-release.svg)](https://www.npmjs.com/package/cordova-android-support-gradle-release) [![Total Downloads](https://img.shields.io/npm/dt/cordova-android-support-gradle-release.svg)](https://npm-stat.com/charts.html?package=cordova-android-support-gradle-release)
 ======================================
 
 This Cordova/Phonegap plugin for Android aligns various versions of the Android Support libraries specified by other plugins to a specific version.
