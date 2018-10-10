@@ -17,6 +17,11 @@
         <hook type="after_prepare" src="scripts/apply-changes.js" />
         <hook type="before_build" src="scripts/apply-changes.js" />
         <hook type="after_plugin_install" src="scripts/apply-changes.js" />
+
+        <!-- Cleanup on uninstall -->
+        <hook type="before_plugin_rm" src="scripts/on-uninstall.js" />
+        <hook type="before_plugin_uninstall" src="scripts/on-uninstall.js" />
+
         <preference name="ANDROID_SUPPORT_VERSION" default="27.+" />
         <framework src="cordova-android-support-gradle-release.gradle" custom="true" type="gradleReference" />
         <source-file src="properties.gradle" target-dir="cordova-android-support-gradle-release" /> <!-- cordova-android@6-->
