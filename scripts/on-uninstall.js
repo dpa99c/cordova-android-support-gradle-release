@@ -51,6 +51,12 @@ function attempt(fn) {
 
 module.exports = function (ctx) {
     deferral = ctx.requireCordovaModule('q').defer();
-    attempt(run)();
+    
+    // Only remove configuration files if we are removing the 
+    if((ctx.hook === 'before_plugin_rm' || ctx.hook === 'before_plugin_uninstall') &&
+       ctx.opts.plugins.includes('cordova-android-support-gradle-release')) {
+        attempt(run)();
+    } else deferral.resolve();
+    
     return deferral.promise;
 };
