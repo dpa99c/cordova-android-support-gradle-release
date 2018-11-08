@@ -23,9 +23,14 @@
         <hook type="before_plugin_uninstall" src="scripts/on-uninstall.js" />
 
         <preference name="ANDROID_SUPPORT_VERSION" default="27.+" />
-        <framework src="cordova-android-support-gradle-release.gradle" custom="true" type="gradleReference" />
-        <source-file src="properties.gradle" target-dir="cordova-android-support-gradle-release" /> <!-- cordova-android@6-->
-        <source-file src="properties.gradle" target-dir="app/cordova-android-support-gradle-release" /> <!-- cordova-android@7-->
+
+        <!-- cordova-android@6-->
+        <source-file src="cordova-android-support-gradle-release.gradle" target-dir="cordova-android-support-gradle-release" />
+        <source-file src="properties.gradle" target-dir="cordova-android-support-gradle-release" />
+
+        <!-- cordova-android@7-->
+        <source-file src="cordova-android-support-gradle-release.gradle" target-dir="app/cordova-android-support-gradle-release" />
+        <source-file src="properties.gradle" target-dir="app/cordova-android-support-gradle-release" />
     </platform>
 
 </plugin>
