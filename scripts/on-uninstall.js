@@ -2,7 +2,8 @@ const PLUGIN_NAME = "cordova-android-support-gradle-release";
 
 var FILE_PATHS = [
     "platforms/android/"+PLUGIN_NAME+"/properties.gradle",
-    "platforms/android/app/"+PLUGIN_NAME+"/properties.gradle"
+    "platforms/android/app/"+PLUGIN_NAME+"/properties.gradle",
+    "platforms/android/app/src/main/"+PLUGIN_NAME+"/properties.gradle"
 ];
 
 var deferral, fs, path;

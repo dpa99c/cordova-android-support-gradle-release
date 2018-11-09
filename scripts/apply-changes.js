@@ -1,20 +1,26 @@
 const PLUGIN_NAME = "cordova-android-support-gradle-release";
-const V6 = "cordova-android@6";
-const V7 = "cordova-android@7";
 const PACKAGE_PATTERN = /(compile "com.android.support:[^:]+:)([^"]+)"/g;
 const PROPERTIES_TEMPLATE = 'ext {ANDROID_SUPPORT_VERSION = "<VERSION>"}';
+
+var V6 = "V6";
+var V7_OLD = "V7.0.0-7.1.1";
+var V7_NEW = "V7.1.2+";
 
 var FILE_PATHS = {};
 FILE_PATHS[V6] = {
     "build.gradle": "platforms/android/build.gradle",
     "properties.gradle": "platforms/android/"+PLUGIN_NAME+"/properties.gradle"
 };
-FILE_PATHS[V7] = {
+FILE_PATHS[V7_OLD] = {
     "build.gradle": "platforms/android/app/build.gradle",
     "properties.gradle": "platforms/android/app/"+PLUGIN_NAME+"/properties.gradle"
 };
+FILE_PATHS[V7_NEW] = {
+    "build.gradle": "platforms/android/app/build.gradle",
+    "properties.gradle": "platforms/android/app/src/main/"+PLUGIN_NAME+"/properties.gradle"
+};
 
-var deferral, fs, path, parser, platformVersion;
+var deferral, fs, path, parser, platformVersion, semver;
 
 
 function log(message) {
@@ -27,8 +33,13 @@ function onError(error) {
 }
 
 function getCordovaAndroidVersion(){
-    var cordovaVersion = require(path.resolve(process.cwd(),'platforms/android/cordova/version'));
-    return parseInt(cordovaVersion.version) === 7 ? V7 : V6;
+    var cordovaVersion = require(path.resolve(process.cwd(),'platforms/android/cordova/version')).version;
+    if(semver.satisfies(cordovaVersion, "6")){
+        return V6;
+    }else if(semver.satisfies(cordovaVersion, '7.0.0 - 7.1.1')){
+        return V7_OLD;
+    }
+    return V7_NEW;
 }
 
 
@@ -37,6 +48,7 @@ function run() {
         fs = require('fs');
         path = require('path');
         parser = require('xml2js');
+        semver = require('semver');
     } catch (e) {
         throw("Failed to load dependencies. If using cordova@6 CLI, ensure this plugin is installed with the --fetch option: " + e.toString());
     }
