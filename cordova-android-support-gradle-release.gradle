@@ -5,10 +5,8 @@ repositories{
   }
 }
 
+def ANDROID_SUPPORT_VERSION = "27.+"
 def PLUGIN_NAME = "cordova-android-support-gradle-release"
-
-// Fetch ANDROID_SUPPORT_VERSION var from properties.gradle
-apply from: PLUGIN_NAME + '/properties.gradle'
 
 // List of libs to search for.
 def LIBS = [
