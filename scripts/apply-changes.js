@@ -61,6 +61,7 @@ function run() {
     parser.parseString(data, attempt(function (err, result) {
         if (err) throw err;
         var version, plugins = result.widget.plugin;
+        if (!plugins) throw("No plugins found. Run 'cordova plugin save' in order to save your plugins to your config.xml-file");
         for (var n = 0, len = plugins.length; n < len; n++) {
             var plugin = plugins[n];
             if (plugin.$.name === PLUGIN_NAME && plugin.variable && plugin.variable.length > 0) {
