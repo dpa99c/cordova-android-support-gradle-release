@@ -5,6 +5,7 @@
   "author": "Dave Alden",
   "license": "MIT",
   "dependencies": {
+    "q": "^1.4.1",
     "xml2js": "~0.4.19",
     "semver": "5.1.0"
   },

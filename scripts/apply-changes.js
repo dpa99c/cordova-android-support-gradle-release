@@ -1,5 +1,5 @@
 var PLUGIN_NAME = "cordova-android-support-gradle-release";
-var PACKAGE_PATTERN = /(compile "com.android.support:[^:]+:)([^"]+)"/g;
+var PACKAGE_PATTERN = /(compile|implementation|api|annotationProcessor)( "com.android.support:[^:]+:)([^"]+)"/g;
 var PLUGIN_GRADLE_FOLDER_PATH = "platforms/android/"+PLUGIN_NAME;
 var VERSION_PATTERN = /def ANDROID_SUPPORT_VERSION = "[^"]+"/;
 var VERSION_TEMPLATE = "def ANDROID_SUPPORT_VERSION = \"<VERSION>\"";
@@ -73,7 +73,7 @@ function run() {
             // build.gradle
             var buildGradlePath = path.resolve(process.cwd(), FILE_PATHS[platformVersion]["build.gradle"]);
             var contents = fs.readFileSync(buildGradlePath).toString();
-            fs.writeFileSync(buildGradlePath, contents.replace(PACKAGE_PATTERN, "$1" + version + '"'), 'utf8');
+            fs.writeFileSync(buildGradlePath, contents.replace(PACKAGE_PATTERN, "$1$2" + version + '"'), 'utf8');
             log("Wrote custom version '" + version + "' to " + buildGradlePath);
 
             // plugin gradle
@@ -102,7 +102,13 @@ function attempt(fn) {
 }
 
 module.exports = function (ctx) {
-    deferral = ctx.requireCordovaModule('q').defer();
+    try{
+        deferral = require('q').defer();
+    }catch(e){
+        e.message = 'Unable to load node module dependency \'q\': '+e.message;
+        log(e.message);
+        throw e;
+    }
     attempt(run)();
     return deferral.promise;
 };
