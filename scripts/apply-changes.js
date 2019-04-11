@@ -29,7 +29,7 @@ function onError(error) {
 
 function getCordovaAndroidVersion(){
     var cordovaVersion = require(path.resolve(process.cwd(),'platforms/android/cordova/version')).version;
-    if(semver.satisfies(cordovaVersion, "6")){
+    if (semver.satisfies(cordovaVersion, "6.x", { includePrerelease: true })){
         return V6;
     }
     return V7;
