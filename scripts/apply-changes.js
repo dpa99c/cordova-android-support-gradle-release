@@ -1,8 +1,9 @@
 var PLUGIN_NAME = "cordova-android-support-gradle-release";
+var PLUGIN_VAR = "ANDROID_SUPPORT_VERSION";
 var PACKAGE_PATTERN = /(compile|implementation|api|annotationProcessor)( "com.android.support:[^:]+:)([^"]+)"/g;
 var PLUGIN_GRADLE_FOLDER_PATH = "platforms/android/"+PLUGIN_NAME;
-var VERSION_PATTERN = /def ANDROID_SUPPORT_VERSION = "[^"]+"/;
-var VERSION_TEMPLATE = "def ANDROID_SUPPORT_VERSION = \"<VERSION>\"";
+var VERSION_PATTERN = new RegExp('def '+PLUGIN_VAR+' = "[^"]+"');
+var VERSION_TEMPLATE = "def "+PLUGIN_VAR+" = \"<VERSION>\"";
 
 var V6 = "V6";
 var V7 = "V7+";
@@ -15,7 +16,7 @@ FILE_PATHS[V7] = {
     "build.gradle": "platforms/android/app/build.gradle"
 };
 
-var deferral, fs, path, parser, semver,
+var deferral, fs, path, semver,
     platformVersion;
 
 function log(message) {
@@ -39,7 +40,6 @@ function run() {
     try {
         fs = require('fs');
         path = require('path');
-        parser = require('xml2js');
         semver = require('semver');
     } catch (e) {
         throw("Failed to load dependencies. If using cordova@6 CLI, ensure this plugin is installed with the --fetch option: " + e.toString());
@@ -48,47 +48,32 @@ function run() {
     platformVersion = getCordovaAndroidVersion();
     log("Android platform: " + platformVersion);
 
-    // Read config.xml
-    var configXmlFilePath = path.resolve(process.cwd(), 'config.xml');
-    if(!fs.existsSync(configXmlFilePath)){
-        configXmlFilePath = path.resolve(process.cwd(), 'www/config.xml');
-    }
-    if(!fs.existsSync(configXmlFilePath)){
-        throw "Failed to find config.xml if project root or www/";
+    var customVersion;
+    try{
+        var packageJSON = JSON.parse(fs.readFileSync('./package.json'));
+        customVersion = packageJSON.cordova.plugins[PLUGIN_NAME][PLUGIN_VAR];
+    }catch(e){
+        log("No custom version found in package.json - using plugin default");
     }
 
-    var data = fs.readFileSync(configXmlFilePath);
-    parser.parseString(data, attempt(function (err, result) {
-        if (err) throw err;
-        var version, plugins = result.widget.plugin;
-        if (!plugins) throw("No plugins found. Run 'cordova plugin save' in order to save your plugins to your config.xml-file");
-        for (var n = 0, len = plugins.length; n < len; n++) {
-            var plugin = plugins[n];
-            if (plugin.$.name === PLUGIN_NAME && plugin.variable && plugin.variable.length > 0) {
-                version = plugin.variable.pop().$.value;
-                break;
-            }
-        }
-        if (version) {
-            // build.gradle
-            var buildGradlePath = path.resolve(process.cwd(), FILE_PATHS[platformVersion]["build.gradle"]);
-            var contents = fs.readFileSync(buildGradlePath).toString();
-            fs.writeFileSync(buildGradlePath, contents.replace(PACKAGE_PATTERN, "$1$2" + version + '"'), 'utf8');
-            log("Wrote custom version '" + version + "' to " + buildGradlePath);
 
-            // plugin gradle
-            var pluginGradleFolderPath = path.resolve(process.cwd(), PLUGIN_GRADLE_FOLDER_PATH);
-            var pluginGradleFileName = fs.readdirSync(pluginGradleFolderPath)[0];
-            var pluginGradleFilePath = path.resolve(pluginGradleFolderPath, pluginGradleFileName);
-            var pluginGradleFileContents = fs.readFileSync(pluginGradleFilePath).toString();
-            pluginGradleFileContents = pluginGradleFileContents.replace(VERSION_PATTERN, VERSION_TEMPLATE.replace(/<VERSION>/, version));
-            fs.writeFileSync(pluginGradleFilePath, pluginGradleFileContents, 'utf8');
-            log("Wrote custom version '" + version + "' to " + pluginGradleFilePath);
-        } else {
-            log("No custom version found in config.xml - using plugin default");
-        }
-        deferral.resolve();
-    }));
+    // build.gradle
+    if (customVersion) {
+        var buildGradlePath = path.resolve(process.cwd(), FILE_PATHS[platformVersion]["build.gradle"]);
+        var contents = fs.readFileSync(buildGradlePath).toString();
+        fs.writeFileSync(buildGradlePath, contents.replace(PACKAGE_PATTERN, "$1" + customVersion + '"'), 'utf8');
+        log("Wrote custom version '" + customVersion + "' to " + buildGradlePath);
+
+        // plugin gradle
+        var pluginGradleFolderPath = path.resolve(process.cwd(), PLUGIN_GRADLE_FOLDER_PATH);
+        var pluginGradleFileName = fs.readdirSync(pluginGradleFolderPath)[0];
+        var pluginGradleFilePath = path.resolve(pluginGradleFolderPath, pluginGradleFileName);
+        var pluginGradleFileContents = fs.readFileSync(pluginGradleFilePath).toString();
+        pluginGradleFileContents = pluginGradleFileContents.replace(VERSION_PATTERN, VERSION_TEMPLATE.replace(/<VERSION>/, customVersion));
+        fs.writeFileSync(pluginGradleFilePath, pluginGradleFileContents, 'utf8');
+        log("Wrote custom version '" + customVersion + "' to " + pluginGradleFilePath);
+    }
+    deferral.resolve();
 }
 
 function attempt(fn) {
