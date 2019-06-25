@@ -61,7 +61,7 @@ function run() {
     if (customVersion) {
         var buildGradlePath = path.resolve(process.cwd(), FILE_PATHS[platformVersion]["build.gradle"]);
         var contents = fs.readFileSync(buildGradlePath).toString();
-        fs.writeFileSync(buildGradlePath, contents.replace(PACKAGE_PATTERN, "$1" + customVersion + '"'), 'utf8');
+        fs.writeFileSync(buildGradlePath, contents.replace(PACKAGE_PATTERN, "$1 $2" + customVersion + '"'), 'utf8');
         log("Wrote custom version '" + customVersion + "' to " + buildGradlePath);
 
         // plugin gradle
