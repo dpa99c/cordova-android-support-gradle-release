@@ -1,3 +1,6 @@
+# DEPRECATION NOTICE
+This plugin is deprecated and no longer maintained since the Android Support Library it itself deprecated and has been superseded by the AndroidX (Jetifier) library.
+
 cordova-android-support-gradle-release [![Latest Stable Version](https://img.shields.io/npm/v/cordova-android-support-gradle-release.svg)](https://www.npmjs.com/package/cordova-android-support-gradle-release) [![Total Downloads](https://img.shields.io/npm/dt/cordova-android-support-gradle-release.svg)](https://npm-stat.com/charts.html?package=cordova-android-support-gradle-release)
 ======================================
 
